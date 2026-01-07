@@ -1,34 +1,64 @@
-from datetime import datetime
-import uuid
+# app/api/v1/ingest.py
 
 from fastapi import APIRouter, HTTPException
+from typing import Dict, Any
 
-from app.models.log_event import LogEvent
-from app.core.elastic import es, INDEX_PREFIX
+from app.core.normalizer import LogNormalizer
+from app.core.enricher import LogEnricher
+from app.core.anomaly import AnomalyDetector
+from app.core.explain import ExplainabilityEngine
+from app.core.custody import ChainOfCustody
+from app.core.elastic import get_es_client
 
-router = APIRouter()
+router = APIRouter(prefix="/ingest", tags=["Ingest"])
 
-@router.post("/ingest")
-async def ingest_log(event: LogEvent):
-    # Transform incoming event into a format suitable for Elasticsearch
-    doc = {
-        "@timestamp": event.timestamp.isoformat(),
-        "device_type": event.device_type,
-        "device_id": event.device_id,
-        "event_type": event.event_type,
-        "severity": event.severity,
-        "message": event.message,
-        "details": event.details,
-        "ingest_id": str(uuid.uuid4()),
-        "ingested_at": datetime.utcnow().isoformat(),
-    }
 
-    # ES index name e.g. spectralog-2025.12.01
-    index_name = f"{INDEX_PREFIX}-{event.timestamp.strftime('%Y.%m.%d')}"
+@router.post("/")
+def ingest_log(payload: Dict[str, Any]):
+    """
+    Ingest raw log and process through full forensic pipeline.
+    """
 
     try:
-        res = es.index(index=index_name, document=doc)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to index document: {e}")
+        # 1️⃣ Normalize
+        event = LogNormalizer.normalize(
+            raw_log=payload.get("raw_log", ""),
+            source_type=payload.get("source_type", "unknown"),
+            device_id=payload.get("device_id", "unknown"),
+            user_id=payload.get("user_id", "unknown"),
+            event_type=payload.get("event_type", "system"),
+            action=payload.get("action", "unknown"),
+            severity=payload.get("severity", "low"),
+            parsed_fields=payload.get("parsed_fields", {}),
+            timestamp=payload.get("timestamp"),
+        )
 
-    return {"status": "indexed", "index": index_name, "id": res.get('_id')}
+        # 2️⃣ Enrich
+        event = LogEnricher.enrich(event)
+
+        # 3️⃣ Anomaly Detection
+        event = AnomalyDetector.analyze(event)
+
+        # 4️⃣ Explainability
+        event = ExplainabilityEngine.explain(event)
+
+        # 5️⃣ Chain of Custody
+        event = ChainOfCustody.generate_hash(event)
+
+        # 6️⃣ Store in Elasticsearch (OPTIONAL during dev)
+        try:
+            es = get_es_client()
+            es.index(index="logs-events", document=event)
+        except Exception as es_error:
+            # Do NOT crash ingestion if ES is down
+            print("Elasticsearch unavailable:", es_error)
+
+        return {
+            "status": "success",
+            "event_id": event["event_id"],
+            "anomalous": event["anomaly"]["is_anomalous"],
+            "explanation": event["explanation"],
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
