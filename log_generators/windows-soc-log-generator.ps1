@@ -1,4 +1,4 @@
-$uri = "http://localhost:9200/spectralog-windows/_doc"
+$uri = "http://localhost:9200/logs-events/_doc"
 
 $events = @(
     @{
@@ -35,19 +35,57 @@ $events = @(
     }
 )
 
-$event = Get-Random $events
+# Send 100 fake Windows logs
+for ($i = 1; $i -le 100; $i++) {
 
-$log = @{
-    "@timestamp"        = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
-    "event.category"    = $event.category
-    "event.action"      = $event.action
-    "event.outcome"     = $event.outcome
-    "event.severity"    = $event.severity
-    "host.name"         = $env:COMPUTERNAME
-    "user.name"         = $env:USERNAME
-    "source.ip"         = "192.168.1.$(Get-Random -Minimum 2 -Maximum 254)"
-    "log.level"         = $event.level
-    "message"           = $event.message
+    $nowUtc = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+    $event = Get-Random $events
+
+    $log = @{
+        # when the event occurred
+        "@timestamp"   = $nowUtc
+        "timestamp"        = $nowUtc
+
+        # when SOC ingested it
+        "ingested_at"      = $nowUtc
+
+        "event" = @{
+            "category" = $event.category
+            "action"   = $event.action
+            "outcome"  = $event.outcome
+            "severity" = $event.severity
+        }
+
+        "host" = @{
+            "name" = $env:COMPUTERNAME
+        }
+
+        "user" = @{
+            "name" = $env:USERNAME
+        }
+
+        "source" = @{
+            "ip" = "192.168.1.$(Get-Random -Minimum 2 -Maximum 254)"
+        }
+
+        "log" = @{
+            "level" = $event.level
+        }
+
+        "message" = $event.message
+
+        
+        "data_origin" = "synthetic"
+        "platform"    = "windows"
+    }
+
+    Invoke-RestMethod `
+        -Method Post `
+        -Uri $uri `
+        -ContentType "application/json" `
+        -Body ($log | ConvertTo-Json -Depth 5)
+
+    Start-Sleep -Milliseconds 100
 }
 
-Invoke-RestMethod -Method Post -Uri $uri -ContentType "application/json" -Body ($log | ConvertTo-Json)
+Write-Host " 100 fake Windows logs (with ingested_at) sent to logs-events"
