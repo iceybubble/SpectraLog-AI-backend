@@ -80,6 +80,7 @@ for raw in iter(process.stdout.readline, b""):
             "parsed_fields": {},
             "timestamp": datetime.utcnow().isoformat()
         }
+        
         unparsed += 1
 
     try:
