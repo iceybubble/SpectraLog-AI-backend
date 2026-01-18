@@ -70,11 +70,6 @@ A functional SOC monitoring environment capable of detecting and visualizing sus
 
 ---
 
-## 🎥 Demo Video
-
-
-
----
 
 ## ▶️ How to Run Locally
 
