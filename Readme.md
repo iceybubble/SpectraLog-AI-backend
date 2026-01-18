@@ -76,22 +76,6 @@ A functional SOC monitoring environment capable of detecting and visualizing sus
 
 ---
 
-## SOC Dashboard Screenshots
-
-Sample dashboards built as part of SpectraLogAI:
-
-- Windows Security Events Dashboard  
-- Android Activity Logs Dashboard  
-- SOC Alerts Dashboard  
-- Event Timeline & Trends  
-
-Example:
-```
-![DAshboard](image-1.png)
-![SOC Dashboard](image-2.png)
-![Alerts](image.png)
-
-```
 ## ▶️ How to Run Locally
 
 ### Prerequisites
@@ -115,43 +99,36 @@ curl http://localhost:9200
 ```
 Step 2: Ingest Logs
 
-Run the provided PowerShell scripts to generate Windows logs
-
-Send Android logs as structured JSON requests
-
-Ensure each log contains a valid @timestamp field
+-Run the provided PowerShell scripts to generate Windows logs
+-Send Android logs as structured JSON requests
+-Ensure each log contains a valid @timestamp field
 
 Step 3: Create Data Views in Kibana
 
-Navigate to Stack Management → Data Views
+-Navigate to Stack Management → Data Views
 
 Create data views for:
 
-Windows logs index
-
-Android logs index
-
-SOC alerts index
-
-Select @timestamp as the time field
+-Windows logs index
+-Android logs index
+-SOC alerts index
+-Select @timestamp as the time field
 
 Step 4: Import Dashboards
 
-Open Kibana → Dashboards
-
-Import saved dashboards (Windows, Android, SOC)
-
-Verify that visualizations are populated with log data
+-Open Kibana → Dashboards
+-Import saved dashboards (Windows, Android, SOC)
+-Verify that visualizations are populated with log data
 
 Step 5: Trigger Alerts
 
-Send test logs that match alert rule conditions
-
-Verify alerts appear in:
+-Send test logs that match alert rule conditions
+-Verify alerts appear in:
 
 Alerts & Rules
-
 SOC Alerts dashboard
+
+---
 
 ## Technology Stack
 
