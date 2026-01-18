@@ -97,6 +97,7 @@ Verify Elasticsearch is running:
 ```
 curl http://localhost:9200
 ```
+---
 Step 2: Ingest Logs
 
 -Run the provided PowerShell scripts to generate Windows logs
