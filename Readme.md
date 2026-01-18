@@ -72,7 +72,7 @@ A functional SOC monitoring environment capable of detecting and visualizing sus
 
 ## 🎥 Demo Video
 
-*<video controls src="Spectra_Demo-1.mp4" title="Demo"></video>*
+
 
 ---
 
