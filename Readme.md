@@ -1,155 +1,219 @@
-# 🔐 SpectraLogAI  
+#  SpectraLogAI  
 ### AI-Assisted Forensic SIEM & SOC Platform
 
-SpectraLogAI is a **forensic-first Security Information and Event Management (SIEM)** platform designed to address real-world cybersecurity challenges such as fragmented logs, alert fatigue, and slow investigations.
+SpectraLogAI is a **forensic-first Security Information and Event Management (SIEM)** platform designed to tackle real-world cybersecurity challenges such as fragmented logs, alert fatigue, and slow investigations.
 
-The project simulates a **modern Security Operations Center (SOC)** by ingesting logs from multiple devices, generating alerts, and visualizing events through dashboards — while laying the foundation for **AI-powered, explainable forensic investigations**.
+The project simulates a **modern Security Operations Center (SOC)** by ingesting logs from multiple devices, generating alerts, and visualizing security events through dashboards — while laying the foundation for **AI-powered, explainable forensic investigations**.
 
 ---
 
-## 🚨 Problem Statement
+##  Problem Statement
 
 Cybercrime investigations and SOC operations face major challenges:
 
-- Massive volumes of logs from Windows systems, mobile devices, servers, and applications
-- Logs stored in different formats and locations
-- Manual forensic analysis taking days or weeks
-- Alerts without explanation or context
-- Difficulty correlating events across multiple devices
+- Massive volumes of logs from Windows systems, mobile devices, servers, and applications  
+- Logs stored across different formats, sources, and locations  
+- Manual forensic log analysis taking days or weeks  
+- Alerts without sufficient context or explanation  
+- Difficulty correlating events across multiple devices  
 
-As a result, many security incidents remain unresolved due to slow and complex analysis workflows.
+As a result, many cyber incidents remain unresolved due to slow and complex analysis workflows.
 
 ---
 
-## 💡 Proposed Solution
+##  Proposed Solution
 
 **SpectraLogAI** provides a **unified forensic log investigation framework** that:
 
-- Centralizes logs from multiple sources
-- Enables SOC-style alerting and monitoring
-- Visualizes events and timelines for analysts
-- Evolves toward AI-driven correlation, explainability (XAI), and LLM-based investigation assistance
+- Centralizes logs from multiple platforms  
+- Enables SOC-style monitoring and alerting  
+- Visualizes security events and timelines  
+- Evolves toward AI-driven correlation, explainability (XAI), and LLM-based investigation assistance  
 
-The platform is built **incrementally in stages**, mirroring real-world SOC and SIEM development.
-
----
-
-## 🧱 System Architecture (Current)
-
-
-
-
-Future stages will extend this architecture with correlation, enrichment, and AI layers.
+The platform is built **incrementally**, closely reflecting real SOC and forensic workflows.
 
 ---
 
-## ✅ Development Progress
+##  Development Progress
 
-### 🟢 Stage 1 – Multi-Source Log Ingestion & Storage  
+### Stage 1 – Multi-Source Log Ingestion & Storage  
 **Status:** Completed
 
-**Features Implemented:**
-- Windows and Android log generation
-- Proper `@timestamp` handling
-- Centralized log ingestion into Elasticsearch
-- Separate indices / data views
-- Field mapping verification in Kibana
-- Searchable and structured log storage
+**Implemented Features:**
+- Windows and Android log generation  
+- Proper `@timestamp` handling  
+- Centralized log ingestion into Elasticsearch  
+- Separate indices / data views  
+- Field mapping validation in Kibana  
+- Searchable and structured log storage  
 
 **Outcome:**  
-A unified, centralized log store forming the base of a forensic SIEM.
-
-🎥 **Stage 1 Demo Video:**  
-*(Add GitHub video asset link here)*
+A unified log repository forming the foundation of a forensic SIEM.
 
 ---
 
-### 🟢 Stage 2 – SOC Alerts & Dashboards  
+### Stage 2 – SOC Alerts & Dashboards  
 **Status:** Completed
 
-**Features Implemented:**
-- SOC-style alert rules
-- Custom test logs for rule validation
-- Alert triggering and verification
+**Implemented Features:**
+- SOC-style alert rules  
+- Custom test logs for rule validation  
+- Alert triggering and verification  
 - Dedicated dashboards for:
-  - Windows logs
-  - Android logs
-  - SOC alerts
-- Timeline-based event visualization
+  - Windows logs  
+  - Android logs  
+  - SOC alerts  
+- Timeline-based event visualization  
 
 **Outcome:**  
-A functional SOC monitoring environment with alerts and dashboards.
-
-🎥 **Stage 2 Demo Video:**  
-*(Add GitHub video asset link here)*
+A functional SOC monitoring environment capable of detecting and visualizing suspicious activity.
 
 ---
 
-## 📊 Dashboards Available
+## 🎥 Demo Video
 
-- 🖥️ Windows Security Events Dashboard  
-- 📱 Android Activity Logs Dashboard  
-- 🚨 SOC Alerts Dashboard  
-- ⏱️ Event Timelines & Trends  
-
-These dashboards replicate real SOC analyst workflows.
+*<video controls src="Spectra_Demo-1.mp4" title="Demo"></video>*
 
 ---
 
-## 🛠️ Technology Stack
+## SOC Dashboard Screenshots
 
-- **Elasticsearch** – Centralized log storage & search  
-- **Kibana** – Dashboards, alerts, and SOC views  
-- **PowerShell / Scripts** – Log generation & testing  
-- **REST APIs** – Log ingestion  
-- **JSON** – Normalized log format  
+Sample dashboards built as part of SpectraLogAI:
 
----
+- Windows Security Events Dashboard  
+- Android Activity Logs Dashboard  
+- SOC Alerts Dashboard  
+- Event Timeline & Trends  
 
-## 🔮 Roadmap
+Example:
+```
+![DAshboard](image-1.png)
+![SOC Dashboard](image-2.png)
+![Alerts](image.png)
 
-### Stage 3 – Correlation, Enrichment & XAI (yet to be created)
-- Cross-platform event correlation
-- IP and geo-location enrichment
-- Attack timeline reconstruction
-- Explainable alerts (why an event is suspicious)
+```
+## ▶️ How to Run Locally
 
-### Stage 4 – AI Copilot & Forensic Automation (yet to be created)
-- Natural-language SOC queries
-- AI-assisted investigation summaries
-- Automated incident reporting
-- Evidence integrity and chain-of-custody concepts
-
----
-
-## 🎯 Intended Use Cases
-
-- SOC analyst training and simulation  
-- Cybercrime investigation workflows  
-- Hackathon and academic demonstrations  
-- Affordable security monitoring for education and government  
-- Foundations for AI-assisted DFIR platforms  
+### Prerequisites
+- Elasticsearch (local instance)
+- Kibana (same version as Elasticsearch)
+- Windows system (for PowerShell-based log generation)
+- Basic understanding of Kibana dashboards
 
 ---
 
-## 🌟 Unique Value Proposition
+### Step 1: Start Elasticsearch and Kibana
+Ensure both services are running locally:
 
-SpectraLogAI is designed to evolve beyond traditional SIEM tools by focusing on:
+- Elasticsearch: `http://localhost:9200`
+- Kibana: `http://localhost:5601`
 
-- **Explainability** instead of black-box alerts  
-- **Investigation-first workflows**  
-- **Multi-device and multi-source correlation**  
-- **Accessibility for non-expert analysts**  
+Verify Elasticsearch is running:
 
----
+```
+curl http://localhost:9200
+```
+Step 2: Ingest Logs
 
-## 📜 License
+Run the provided PowerShell scripts to generate Windows logs
 
-This project is developed for **educational, research, and hackathon purposes**.
+Send Android logs as structured JSON requests
 
----
+Ensure each log contains a valid @timestamp field
 
-## 🤝 Contributions
+Step 3: Create Data Views in Kibana
 
-Feedback, suggestions, and contributions are welcome.  
-Feel free to open issues or submit pull requests.
+Navigate to Stack Management → Data Views
+
+Create data views for:
+
+Windows logs index
+
+Android logs index
+
+SOC alerts index
+
+Select @timestamp as the time field
+
+Step 4: Import Dashboards
+
+Open Kibana → Dashboards
+
+Import saved dashboards (Windows, Android, SOC)
+
+Verify that visualizations are populated with log data
+
+Step 5: Trigger Alerts
+
+Send test logs that match alert rule conditions
+
+Verify alerts appear in:
+
+Alerts & Rules
+
+SOC Alerts dashboard
+
+## Technology Stack
+
+- Elasticsearch – centralized log storage and indexing  
+- Kibana – dashboards, alerting, and SOC visualization  
+- PowerShell – Windows log generation  
+- REST APIs – log ingestion interface  
+- JSON – log format and data exchange  
+- Elastic Alerting Rules – detection and alert generation  
+- Windows OS – development and testing environment  
+
+
+## Roadmap
+Stage 3 – Correlation, Enrichment & Explainability
+
+Cross-platform event correlation
+
+IP and geo-location enrichment
+
+Attack timeline reconstruction
+
+Explainable alerts
+
+Stage 4 – AI Copilot & Forensic Automation
+
+Natural-language SOC queries
+
+AI-assisted investigation summaries
+
+Automated incident reporting
+
+Evidence integrity and chain-of-custody concepts
+
+## Intended Use Cases
+
+SOC analyst training and simulation
+
+Cybercrime investigation workflows
+
+Hackathon and academic demonstrations
+
+Affordable security monitoring for education and government
+
+Foundations for AI-assisted DFIR platforms
+
+## Unique Value Proposition
+
+SpectraLogAI focuses on investigation-first security monitoring by offering:
+
+Explainable security alerts
+
+Multi-device and multi-source log analysis
+
+Analyst-friendly dashboards and timelines
+
+A scalable foundation for AI-assisted forensic analysis
+
+📜 License
+
+This project is developed for educational, research, and hackathon purposes.
+
+🤝 Contributions
+
+Contributions, feedback, and suggestions are welcome.
+Please open an issue or submit a pull request to contribute.
