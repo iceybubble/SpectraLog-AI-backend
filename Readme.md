@@ -126,15 +126,23 @@ SOC Alerts dashboard
 
 ---
 
-## Technology Stack
+## 🧰 Tech Stack
 
-- Elasticsearch – centralized log storage and indexing  
-- Kibana – dashboards, alerting, and SOC visualization  
-- PowerShell – Windows log generation  
-- REST APIs – log ingestion interface  
-- JSON – log format and data exchange  
-- Elastic Alerting Rules – detection and alert generation  
-- Windows OS – development and testing environment  
+| Technology | Purpose / Usage |
+|-----------|------------------|
+| Windows OS | Development, testing, and primary log source |
+| PowerShell | Generate Windows security, system, and application logs |
+| REST APIs | Secure log ingestion from external sources |
+| JSON | Standardized log data format |
+| Filebeat / Winlogbeat | Collect and forward logs to ingestion pipeline |
+| Logstash | Parse, validate, normalize, and enrich logs |
+| Elasticsearch | Centralized log storage, indexing, and fast search |
+| Elastic Alerting Rules | Detection logic and alert generation |
+| AI / ML Engine | Event correlation and anomaly detection |
+| SHAP / LIME (XAI) | Explainability for AI-generated alerts |
+| LLM Investigator Assistant | Natural language queries and investigation support |
+| Kibana | Dashboards, SOC visualization, and log exploration |
+
 
 
 ## Roadmap
