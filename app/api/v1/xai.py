@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from models.schemas import XAIExplanation
+from app.models.schemas import XAIExplanation
 
 router = APIRouter(prefix="/xai", tags=["xai"])
 

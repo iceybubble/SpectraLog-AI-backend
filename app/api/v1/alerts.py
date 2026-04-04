@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Query
 from typing import Optional
 from datetime import datetime
-from models.schemas import Alert, AlertUpdate, PaginatedResponse, AlertStatus
-from core.elastic import get_es_client
+from app.models.schemas import Alert, AlertUpdate, PaginatedResponse, AlertStatus
+from app.core.elastic import get_es_client
 
 router = APIRouter(prefix="/alerts", tags=["alerts"])
 

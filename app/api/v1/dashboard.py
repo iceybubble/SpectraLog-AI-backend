@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from models.schemas import DashboardMetrics
-from core.elastic import get_es_client
+from app.models.schemas import DashboardMetrics
+from app.core.elastic import get_es_client
 
 router = APIRouter(prefix="/dashboard", tags=["dashboard"])
 

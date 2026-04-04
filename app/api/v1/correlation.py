@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from typing import Optional, List
 from datetime import datetime
-from models.schemas import TimelineEvent, CorrelationGraph
+from app.models.schemas import TimelineEvent, CorrelationGraph
 
 router = APIRouter(prefix="/correlation", tags=["correlation"])
 
