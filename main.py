@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # Direct imports
-from app.api.v1 import logs, alerts, correlation, xai, dashboard, cases, ingest
+from app.api.v1 import logs, alerts, correlation, xai, dashboard, cases, ingest, enrichment
 
 app = FastAPI(
     title="SpectraLog AI API",
@@ -31,6 +31,7 @@ app.include_router(xai.router, prefix="/api/v1")
 app.include_router(dashboard.router, prefix="/api/v1")
 app.include_router(cases.router, prefix="/api/v1")
 app.include_router(ingest.router, prefix="/api/v1")
+app.include_router(enrichment.router, prefix="/api/v1")
 
 
 @app.get("/")

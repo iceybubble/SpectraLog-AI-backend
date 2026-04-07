@@ -19,6 +19,26 @@ class LogSeverity(str, Enum):
     CRITICAL = "critical"
 
 
+class Log(BaseModel):
+    id: str
+    timestamp: str
+    source: LogSource
+    severity: LogSeverity
+    event_type: str
+    message: str
+    device_id: Optional[str] = None
+    user: Optional[str] = None
+    ip_address: Optional[str] = None
+    metadata: Optional[Dict[str, Any]] = None
+
+
+class LogSearchBody(BaseModel):
+    query: Optional[str] = None
+    filters: Optional[Dict[str, Any]] = None
+    limit: int = Field(default=20, ge=1, le=1000)
+    offset: int = Field(default=0, ge=0)
+
+
 class AlertSeverity(str, Enum):
     LOW = "low"
     MEDIUM = "medium"
