@@ -13,22 +13,24 @@ async def get_metrics():
         es = get_es_client()
         
         # Count total logs
-        total_logs = es.count(index="logs-*")["count"]
+        total_logs = es.count(index="logs-*", request_timeout=1)["count"]
         
         # Count total alerts
-        total_alerts = es.count(index="alerts-*")["count"]
+        total_alerts = es.count(index="alerts-*", request_timeout=1)["count"]
         
         # Count critical alerts
         critical_alerts_result = es.count(
             index="alerts-*",
-            query={"term": {"severity": "critical"}}
+            query={"term": {"severity": "critical"}},
+            request_timeout=1,
         )
         critical_alerts = critical_alerts_result["count"]
         
         # Count open investigations
         open_investigations = es.count(
             index="alerts-*",
-            query={"term": {"status": "investigating"}}
+            query={"term": {"status": "investigating"}},
+            request_timeout=1,
         )["count"]
         
         # TODO: Calculate devices_monitored from unique device_ids

@@ -33,7 +33,8 @@ async def get_alerts(
             index="alerts-*",
             query=query,
             size=limit,
-            sort=[{"@timestamp": {"order": "desc"}}]
+            sort=[{"@timestamp": {"order": "desc"}}],
+            request_timeout=1,
         )
         
         alerts = []
