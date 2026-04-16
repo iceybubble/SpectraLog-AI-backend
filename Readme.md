@@ -146,17 +146,21 @@ SOC Alerts dashboard
 
 
 ## Roadmap
-Stage 3 – Correlation, Enrichment & Explainability
+### Stage 3 – Correlation, Enrichment & Explainability
+**Status:** In Progress
 
-Cross-platform event correlation
+**Current Progress:**
+- Correlation, XAI, enrichment, dashboard, alerts, and logs API routes are wired for frontend integration
+- Backend request/response contracts now match the current frontend API client
+- Elasticsearch access now fails fast with fallback responses when ES is offline
 
-IP and geo-location enrichment
+**Pending for Completion:**
+- Cross-platform event correlation using real Elasticsearch-backed logic
+- IP and geo-location enrichment from real enrichment sources
+- Attack timeline reconstruction from actual linked case and event data
+- Explainable alerts generated from real model outputs and investigation context
 
-Attack timeline reconstruction
-
-Explainable alerts
-
-Stage 4 – AI Copilot & Forensic Automation
+### Stage 4 – AI Copilot & Forensic Automation
 
 Natural-language SOC queries
 
